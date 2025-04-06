@@ -9,11 +9,11 @@ class Funcionario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'descricao', 'preco', 'estoque', 'categoria_id'];
+    protected $fillable = ['nome_completo', 'cpf', 'cnh', 'dt_nascimento', 'endereco', 'telefone', 'cidade_id'];
 
-    // public function categoria() 
-    // {
-    //     return $this->belongsTo(Categoria::class);
-    // }
+    public function cidade() 
+    {
+        return $this->belongsTo(Cidade::class);
+    }
 
 }
