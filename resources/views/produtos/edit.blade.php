@@ -3,28 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Funcionario</title>
+    <title>Editar Produtos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body class="container">
-    <h1>Editar Funcionario</h1>
+    <h1>Editar Produtos</h1>
     
-    <form method="post" action="/funcionarios/{{ $funcionario-> id }}">
+    <form method="post" action="/produtos/{{ $produto-> id }}">
         @CSRF
         @method('PUT')
         <div class="mb-3">
             <label for="descricao" class="form-label">Informe a descricao:</label>
-            <input type="text" id="descricao" name="descricao" value="{{ $funcionario->descricao}}" class="form-control" required="">
+            <input type="text" id="descricao" name="descricao" value="{{ $produto->descricao}}" class="form-control" required="">
         </div>
     
         <div class="mb-3">
             <label for="preco" class="form-label">Informe preco:</label>
-            <input type="text" id="preco" name="preco" value="{{ $funcionario->preco }}" class="form-control" required="">
+            <input type="text" id="preco" name="preco" value="{{ $produto->preco }}" class="form-control" required="">
         </div>
 
         <div class="mb-3">
             <label for="estoque" class="form-label">Informe estoque:</label>
-            <input type="number" id="estoque" name="estoque" value="{{ $funcionario->estoque }}" class="form-control" required="">
+            <input type="number" id="estoque" name="estoque" value="{{ $produto->estoque }}" class="form-control" required="">
         </div>
 
         <div class="mb-3">

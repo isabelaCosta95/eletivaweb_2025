@@ -23,7 +23,7 @@
         </div>
     
         <div class="mb-3">
-            <label for="estoque" class="form-label">Informe o preço:</label>
+            <label for="estoque" class="form-label">Informe o estoque:</label>
             <input type="number" id="estoque" name="estoque" class="form-control" required="">
         </div>
     
@@ -32,7 +32,7 @@
             <select id="categoria_id" name="categoria_id" class="form-select" required="">
                 @foreach ($categorias as $c)
                     <option value="{{ $c->id }}">
-                        {{ $c->descricao }}
+                        {{ $c->nome }}
                     </option>
                 @endforeach
             </select>
