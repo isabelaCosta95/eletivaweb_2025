@@ -38,8 +38,8 @@
                 <tr>
                     <td> {{ $p->id }}</td>
                     <td> {{ $p->nome_completo }}</td>
-                    <td> {{ $p->categoria->cpf }}</td>
-                    <td> {{ $p->categoria->telefone }}</td>
+                    <td> {{ $p->cpf }}</td>
+                    <td> {{ $p->telefone }}</td>
                     <td>
                         <a href="/funcionarios/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
                         <a href="/funcionarios/{{ $p->id }}" class="btn btn-info">Consultar</a>

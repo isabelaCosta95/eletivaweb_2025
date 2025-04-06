@@ -47,7 +47,7 @@
             <select id="cidade_id" name="cidade_id" class="form-select" required="">
                 @foreach ($cidades as $c)
                     <option value="{{ $c->id }}">
-                        {{ $c->nome }}
+                        {{ $c->descricao }}
                     </option>
                 @endforeach
             </select>
