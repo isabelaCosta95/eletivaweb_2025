@@ -84,7 +84,7 @@
         </div>
 
         <div class="col">
-            <a href="{{ route('tipos_manutencao.index') }}" class="text-decoration-none text-dark">
+            <a href="{{ route('tipo_manutencaos.index') }}" class="text-decoration-none text-dark">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <i class="bi bi-tools fs-1 text-secondary"></i>
