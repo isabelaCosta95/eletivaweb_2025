@@ -6,10 +6,7 @@ use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\VeiculoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
-
-
-
-
+use App\Http\Controllers\TipoManutencaoController;
 
 Route::get('/', function () {
     return view('welcome');
