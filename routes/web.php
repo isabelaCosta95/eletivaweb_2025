@@ -6,16 +6,6 @@ use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\VeiculoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\TipoManutencaoController;
-use App\Http\Controllers\PlanoContaController;
-use App\Http\Controllers\PecaController;
-use App\Http\Controllers\SeguradoraController;
-use App\Http\Controllers\CargoController;
-
-
-
-
 
 Route::get('/', function () {
     return view('dashboard');
