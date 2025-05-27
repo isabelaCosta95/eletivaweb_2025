@@ -95,7 +95,7 @@
         </div>
 
         <div class="col">
-            <a href="{{ route('planos_conta.index') }}" class="text-decoration-none text-dark">
+            <a href="{{ route('plano_contas.index') }}" class="text-decoration-none text-dark">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <i class="bi bi-journal-text fs-1 text-dark"></i>

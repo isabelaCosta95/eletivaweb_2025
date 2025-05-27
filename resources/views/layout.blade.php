@@ -34,7 +34,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/planos_conta">Plano de Contas</a>
+              <a class="nav-link" href="/plano_contas">Plano de Contas</a>
             </li>
 
             <li class="nav-item">

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('plano_contas', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
             $table->string('descricao');
-            $table->decimal('preco', 10, 2);
-            $table->integer('estoque');
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('plano_contas');
     }
 };
