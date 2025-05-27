@@ -1,55 +1,74 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Seguradoras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body class="container">
-    <h1>Seguradoras</h1>
+@extends('layout')
 
-    <a class="btn btn-primary mb-3" href="/seguradoras/create">Nova Seguradora</a> 
-
-    @if (session('erro'))
-        <div class="alert alert-danger">
-            {{ session('erro')}}
+@section('principal')
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="h3 mb-0 text-gray-800">Seguradoras</h1>
+            <p class="text-muted">Gerencie as seguradoras do sistema</p>
         </div>
-    @endif
+    </div>
 
-    @if (session('sucesso'))
-        <div class="alert alert-success">
-            {{ session('sucesso')}}
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Lista de Seguradoras</h6>
+                    <a href="/seguradoras/create" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Nova Seguradora
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (session('erro'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('erro') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session('sucesso'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('sucesso') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>CNPJ</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th width="200">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($seguradoras as $seguradora)
+                                    <tr>
+                                        <td>{{ $seguradora->id }}</td>
+                                        <td>{{ $seguradora->nome }}</td>
+                                        <td>{{ $seguradora->cnpj }}</td>
+                                        <td>{{ $seguradora->telefone }}</td>
+                                        <td>{{ $seguradora->email }}</td>
+                                        <td>
+                                            <a href="/seguradoras/{{ $seguradora->id }}/edit" class="btn btn-warning btn-sm">
+                                                <i class="bi bi-pencil"></i> Editar
+                                            </a>
+                                            <a href="/seguradoras/{{ $seguradora->id }}" class="btn btn-info btn-sm">
+                                                <i class="bi bi-eye"></i> Consultar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>CNPJ</th>
-                <th>Telefone</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody> 
-            @foreach ($seguradoras as $p)
-                <tr>
-                    <td> {{ $p->id }}</td>
-                    <td> {{ $p->nome }}</td>
-                    <td> {{ $p->cnpj }}</td>
-                    <td> {{ $p->telefone }}</td>
-                    <td>
-                        <a href="/seguradoras/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
-                        <a href="/seguradoras/{{ $p->id }}" class="btn btn-info">Consultar</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+    </div>
+</div>
+@endsection
