@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Funcionários</title>
+    <title>Plano de Contas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body class="container">
-    <h1>Funcionários</h1>
+    <h1>Plano de Contas</h1>
 
-    <a class="btn btn-primary mb-3" href="/funcionarios/create" enctype="multipart/form-data">Novo Funcionario</a> 
+    <a class="btn btn-primary mb-3" href="/plano_contas/create">Novo Plano de Contas</a> 
 
     @if (session('erro'))
         <div class="alert alert-danger">
@@ -27,22 +27,20 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nome Completo</th>
-                <th>CPF</th>
-                <th>Telefone</th>
+                <th>Nome</th>
+                <th>Descrição</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody> 
-            @foreach ($funcionarios as $p)
+            @foreach ($plano_contas as $p)
                 <tr>
                     <td> {{ $p->id }}</td>
-                    <td> {{ $p->nome_completo }}</td>
-                    <td> {{ $p->cpf }}</td>
-                    <td> {{ $p->telefone }}</td>
+                    <td> {{ $p->nome }}</td>
+                    <td> {{ $p->descricao }}</td>
                     <td>
-                        <a href="/funcionarios/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
-                        <a href="/funcionarios/{{ $p->id }}" class="btn btn-info">Consultar</a>
+                        <a href="/plano_contas/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
+                        <a href="/plano_contas/{{ $p->id }}" class="btn btn-info">Consultar</a>
                     </td>
                 </tr>
             @endforeach

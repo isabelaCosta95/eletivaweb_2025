@@ -9,7 +9,7 @@
   <body class="container">
     <h1>Consultar Veículo</h1>
     
-    <form method="post" action="/veiculos/{{ $veiculo-> id }}">
+    <form method="post" action="/veiculos/{{ $veiculo-> id }}" enctype="multipart/form-data">
         @CSRF
         @method('DELETE')
         <div class="mb-3">
@@ -35,6 +35,12 @@
         <div class="mb-3">
             <label for="combustivel" class="form-label">Informe o combustível:</label>
             <input type="text" id="combustivel" name="combustivel" value="{{ $veiculo->combustivel}}" class="form-control" disabled>
+        </div>
+
+        <div class="mb-3">
+            @if ($veiculo->foto)
+                <img src="{{ asset('storage/'.$veiculo->foto) }}" height="50" />
+            @endif
         </div>
 
         <p>Deseja excluir o registro?</p>

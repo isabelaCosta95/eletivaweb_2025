@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Novo Funcionário</title>
+    <title>Novo Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body class="container">
-    <h1>Novo Funcionário</h1>
+    <h1>Novo Cliente</h1>
     
-    <form method="post" action="/funcionarios" enctype="multipart/form-data">
+    <form method="post" action="/clientes" enctype="multipart/form-data">
         @CSRF
         
         <div class="mb-3">
@@ -23,8 +23,8 @@
         </div>
     
         <div class="mb-3">
-            <label for="cnh" class="form-label">Informe o número da CNH:</label>
-            <input type="text" id="cnh" name="cnh" class="form-control" required="">
+            <label for="rg" class="form-label">Informe o número da rg:</label>
+            <input type="text" id="rg" name="rg" class="form-control" required="">
         </div>
     
         <div class="mb-3">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="foto" class="form-label">Foto do Funcionário </label>
+            <label for="foto" class="form-label">Foto do Cliente </label>
             <input type="file" name="foto" id="foto" class="form-control">
         </div>
     

@@ -9,7 +9,7 @@
   <body class="container">
     <h1>Nova Veiculo</h1>
     
-    <form method="post" action="/veiculos">
+    <form method="post" action="/veiculos" enctype="multipart/form-data">
         @CSRF
         
         <div class="mb-3">
@@ -35,6 +35,11 @@
         <div class="mb-3">
             <label for="combustivel" class="form-label">Informe o tipo de combustível:</label>
             <input type="text" id="combustivel" name="combustivel" class="form-control" required="">
+        </div>
+
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto do Veículo </label>
+            <input type="file" name="foto" id="foto" class="form-control">
         </div>
     
         <button type="submit" class="btn btn-primary">Enviar</button>

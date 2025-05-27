@@ -7,6 +7,7 @@ use App\Models\Cidade;
 use App\Models\Funcionario;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class FuncionarioController extends Controller
 {
@@ -34,7 +35,11 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
         try{
-            Funcionario::create($request->all());
+            $dados = $request->all();
+            if ($request->hasFile('foto')){
+                $dados['foto'] = $request->file('foto')->store('funcionarios', 'public');
+            }
+            Funcionario::create($dados);
             return redirect()->route('funcionarios.index')
                 ->with('sucesso', 'Funcionario inserido com sucesso!');
         } catch (Exception $e){
@@ -74,7 +79,13 @@ class FuncionarioController extends Controller
     {
         try{
             $funcionario = Funcionario::findOrFail($id);
-            $funcionario->update($request->all());
+            $dados = $request->all();
+            if ($request->hasFile('foto')){
+                if ($funcionario->foto && Storage::exists('public/'.$funcionario->foto))
+                    Storage::delete('public/'.$funcionario->foto);
+                $dados['foto'] = $request->file('foto')->store('funcionarios', 'public');
+            }
+            $funcionario->update($dados);
             return redirect()->route('funcionarios.index')
                 ->with('sucesso', 'Funcionario alterado com sucesso!');
         } catch (Exception $e){
@@ -96,6 +107,8 @@ class FuncionarioController extends Controller
         try{
             $funcionario = Funcionario::findOrFail($id);
             $funcionario->delete();
+            if ($funcionario->foto && Storage::exists('public/'.$funcionario->foto))
+                    Storage::delete('public/'.$funcionario->foto);
             return redirect()->route('funcionarios.index')
                 ->with('sucesso', 'Funcionario excluído com sucesso!');
         } catch (Exception $e){

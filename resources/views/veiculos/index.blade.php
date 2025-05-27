@@ -9,7 +9,7 @@
   <body class="container">
     <h1>Veículo</h1>
 
-    <a class="btn btn-primary mb-3" href="/veiculos/create">Novo Veículo</a> 
+    <a class="btn btn-primary mb-3" href="/veiculos/create" enctype="multipart/form-data">Novo Veículo</a> 
 
     @if (session('erro'))
         <div class="alert alert-danger">

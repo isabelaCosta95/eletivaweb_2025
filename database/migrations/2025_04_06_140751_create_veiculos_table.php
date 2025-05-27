@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('renavam');
             $table->string('rntc');
             $table->string('combustivel');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('descricao');
             $table->decimal('preco', 10, 2);
             $table->integer('estoque');
+            $table->string('foto')->nullable();
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('restrict');
             $table->timestamps();

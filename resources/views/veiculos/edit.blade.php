@@ -9,7 +9,7 @@
   <body class="container">
     <h1>Editar Veículo</h1>
     
-    <form method="post" action="/veiculos/{{ $veiculo-> id }}">
+    <form method="post" action="/veiculos/{{ $veiculo-> id }}" enctype="multipart/form-data">
         @CSRF
         @method('PUT')
         <div class="mb-3">
@@ -35,6 +35,14 @@
         <div class="mb-3">
             <label for="combustivel" class="form-label">Informe combustível:</label>
             <input type="text" id="combustivel" name="combustivel" value="{{ $veiculo->combustivel }}" class="form-control" required="">
+        </div>
+
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            @if ($veiculo->foto)
+                <img src="{{ asset('storage/'. $veiculo->foto) }}" height="50"/>
+            @endif
+            <input type="file" name="foto" id="foto" class="form-control">
         </div>
     
         <button type="submit" class="btn btn-primary">Enviar</button>

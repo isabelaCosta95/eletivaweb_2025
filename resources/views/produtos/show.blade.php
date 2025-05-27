@@ -9,7 +9,7 @@
   <body class="container">
     <h1>Consultar Produto</h1>
     
-    <form method="post" action="/produtos/{{ $produto-> id }}">
+    <form method="post" action="/produtos/{{ $produto-> id }}" enctype="multipart/form-data">
         @CSRF
         @method('DELETE')
     
@@ -37,6 +37,12 @@
                     </option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="mb-3">
+            @if ($produto->foto)
+                <img src="{{ asset('storage/'.$produto->foto) }}" height="50" />
+            @endif
         </div>
 
         <p>Deseja excluir o registro?</p>

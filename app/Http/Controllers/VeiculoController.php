@@ -32,7 +32,11 @@ class VeiculoController extends Controller
     public function store(Request $request)
     {
         try{
-            Veiculo::create($request->all());
+            $dados = $request->all();
+            if ($request->hasFile('foto')){
+                $dados['foto'] = $request->file('foto')->store('veiculos', 'public');
+            }
+            Veiculo::create($dados);
             return redirect()->route('veiculos.index')
                 ->with('sucesso', 'Veiculo inserida com sucesso!');
         } catch (Exception $e){
@@ -72,7 +76,13 @@ class VeiculoController extends Controller
     {
         try{
             $veiculo = Veiculo::findOrFail($id);
-            $veiculo->update($request->all());
+            $dados = $request->all();
+            if ($request->hasFile('foto')){
+                if ($veiculo->foto && Storage::exists('public/'.$veiculo->foto))
+                    Storage::delete('public/'.$veiculo->foto);
+                $dados['foto'] = $request->file('foto')->store('veiculos', 'public');
+            }
+            $veiculo->update($dados);
             return redirect()->route('veiculos.index')
                 ->with('sucesso', 'Veiculo alterada com sucesso!');
         } catch (Exception $e){
@@ -94,6 +104,8 @@ class VeiculoController extends Controller
         try{
             $veiculo = Veiculo::findOrFail($id);
             $veiculo->delete();
+            if ($veiculo->foto && Storage::exists('public/'.$veiculo->foto))
+                    Storage::delete('public/'.$veiculo->foto);
             return redirect()->route('veiculos.index')
                 ->with('sucesso', 'Veiculo excluído com sucesso!');
         } catch (Exception $e){

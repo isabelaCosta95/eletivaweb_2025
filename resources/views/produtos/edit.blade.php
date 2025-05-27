@@ -9,7 +9,7 @@
   <body class="container">
     <h1>Editar Produtos</h1>
     
-    <form method="post" action="/produtos/{{ $produto-> id }}">
+    <form method="post" action="/produtos/{{ $produto-> id }}" enctype="multipart/form-data"> 
         @CSRF
         @method('PUT')
         <div class="mb-3">
@@ -36,6 +36,14 @@
                     </option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            @if ($produto->foto)
+                <img src="{{ asset('storage/'. $produto->foto) }}" height="50"/>
+            @endif
+            <input type="file" name="foto" id="foto" class="form-control">
         </div>
     
         <button type="submit" class="btn btn-primary">Enviar</button>
