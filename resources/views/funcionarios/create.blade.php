@@ -1,66 +1,101 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Novo Funcionário</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body class="container">
-    <h1>Novo Funcionário</h1>
-    
-    <form method="post" action="/funcionarios" enctype="multipart/form-data">
-        @CSRF
-        
-        <div class="mb-3">
-            <label for="nome_completo" class="form-label">Informe o nome completo:</label>
-            <input type="text" id="nome_completo" name="nome_completo" class="form-control" required="">
-        </div>
-    
-        <div class="mb-3">
-            <label for="cpf" class="form-label">Informe o CPF:</label>
-            <input type="text" id="cpf" name="cpf" class="form-control" required="">
-        </div>
-    
-        <div class="mb-3">
-            <label for="cnh" class="form-label">Informe o número da CNH:</label>
-            <input type="text" id="cnh" name="cnh" class="form-control" required="">
-        </div>
-    
-        <div class="mb-3">
-            <label for="dt_nascimento" class="form-label">Informe o dt_nascimento:</label>
-            <input type="date" id="dt_nascimento" name="dt_nascimento" class="form-control" required="">
-        </div>
+@extends('layout')
 
-        <div class="mb-3">
-            <label for="endereco" class="form-label">Informe o Endereço:</label>
-            <input type="text" id="endereco" name="endereco" class="form-control" required="">
+@section('principal')
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Novo Funcionário</h1>
+            <p class="text-muted">Cadastre um novo funcionário no sistema</p>
         </div>
-    
-        <div class="mb-3">
-            <label for="telefone" class="form-label">Informe o número de telefone:</label>
-            <input type="text" id="telefone" name="telefone" class="form-control" required="">
-        </div>
-    
-        <div class="mb-3">
-            <label for="cidade_id" class="form-label">Selecione a cidade:</label>
-            <select id="cidade_id" name="cidade_id" class="form-select" required="">
-                @foreach ($cidades as $c)
-                    <option value="{{ $c->id }}">
-                        {{ $c->descricao }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        <a href="{{ route('funcionarios.index') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
 
-        <div class="mb-3">
-            <label for="foto" class="form-label">Foto do Funcionário </label>
-            <input type="file" name="foto" id="foto" class="form-control">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" action="{{ route('funcionarios.store') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="nome_completo" class="form-label">Nome Completo</label>
+                        <input type="text" class="form-control @error('nome_completo') is-invalid @enderror" 
+                               id="nome_completo" name="nome_completo" value="{{ old('nome_completo') }}" required>
+                        @error('nome_completo')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="text" class="form-control @error('cpf') is-invalid @enderror" 
+                               id="cpf" name="cpf" value="{{ old('cpf') }}" required>
+                        @error('cpf')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cnh" class="form-label">CNH</label>
+                        <input type="text" class="form-control @error('cnh') is-invalid @enderror" 
+                               id="cnh" name="cnh" value="{{ old('cnh') }}" required>
+                        @error('cnh')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="dt_nascimento" class="form-label">Data de Nascimento</label>
+                        <input type="date" class="form-control @error('dt_nascimento') is-invalid @enderror" 
+                               id="dt_nascimento" name="dt_nascimento" value="{{ old('dt_nascimento') }}" required>
+                        @error('dt_nascimento')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="endereco" class="form-label">Endereço</label>
+                        <input type="text" class="form-control @error('endereco') is-invalid @enderror" 
+                               id="endereco" name="endereco" value="{{ old('endereco') }}" required>
+                        @error('endereco')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" class="form-control @error('telefone') is-invalid @enderror" 
+                               id="telefone" name="telefone" value="{{ old('telefone') }}" required>
+                        @error('telefone')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cidade_id" class="form-label">Cidade</label>
+                        <select class="form-select @error('cidade_id') is-invalid @enderror" 
+                                id="cidade_id" name="cidade_id" required>
+                            <option value="">Selecione uma cidade</option>
+                            @foreach($cidades as $cidade)
+                                <option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : '' }}>
+                                    {{ $cidade->descricao }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('cidade_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="foto" class="form-label">Foto</label>
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" 
+                               id="foto" name="foto" accept="image/*">
+                        @error('foto')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Salvar
+                    </button>
+                </div>
+            </form>
         </div>
-    
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+    </div>
+</div>
+@endsection

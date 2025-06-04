@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Veiculo;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VeiculoController extends Controller
 {

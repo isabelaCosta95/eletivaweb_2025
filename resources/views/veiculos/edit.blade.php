@@ -1,53 +1,85 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Veículo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body class="container">
-    <h1>Editar Veículo</h1>
-    
-    <form method="post" action="/veiculos/{{ $veiculo-> id }}" enctype="multipart/form-data">
-        @CSRF
-        @method('PUT')
-        <div class="mb-3">
-            <label for="placa" class="form-label">Informe a placa:</label>
-            <input type="text" id="placa" name="placa" value="{{ $veiculo->placa}}" class="form-control" required="">
-        </div>
+@extends('layout')
 
-        <div class="mb-3">
-            <label for="proprietario" class="form-label">Informe o proprietário:</label>
-            <input type="text" id="proprietario" name="proprietario" value="{{ $veiculo->proprietario}}" class="form-control" required="">
+@section('principal')
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Editar Veículo</h1>
+            <p class="text-muted">Atualize os dados do veículo</p>
         </div>
-    
-        <div class="mb-3">
-            <label for="renavam" class="form-label">Informe o renavam:</label>
-            <input type="number" id="renavam" name="renavam" value="{{ $veiculo->renavam }}" class="form-control" required="">
-        </div>
+        <a href="{{ route('veiculos.index') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
 
-        <div class="mb-3">
-            <label for="rntc" class="form-label">Informe o rntc:</label>
-            <input type="text" id="rntc" name="rntc" value="{{ $veiculo->rntc}}" class="form-control" required="">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" action="{{ route('veiculos.update', $veiculo->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="placa" class="form-label">Placa</label>
+                        <input type="text" class="form-control @error('placa') is-invalid @enderror" 
+                               id="placa" name="placa" value="{{ old('placa', $veiculo->placa) }}" required>
+                        @error('placa')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="proprietario" class="form-label">Proprietário</label>
+                        <input type="text" class="form-control @error('proprietario') is-invalid @enderror" 
+                               id="proprietario" name="proprietario" value="{{ old('proprietario', $veiculo->proprietario) }}" required>
+                        @error('proprietario')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="renavam" class="form-label">Renavam</label>
+                        <input type="text" class="form-control @error('renavam') is-invalid @enderror" 
+                               id="renavam" name="renavam" value="{{ old('renavam', $veiculo->renavam) }}" required>
+                        @error('renavam')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="rntc" class="form-label">RNTC</label>
+                        <input type="text" class="form-control @error('rntc') is-invalid @enderror" 
+                               id="rntc" name="rntc" value="{{ old('rntc', $veiculo->rntc) }}" required>
+                        @error('rntc')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="combustivel" class="form-label">Combustível</label>
+                        <input type="text" class="form-control @error('combustivel') is-invalid @enderror" 
+                               id="combustivel" name="combustivel" value="{{ old('combustivel', $veiculo->combustivel) }}" required>
+                        @error('combustivel')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="foto" class="form-label">Foto</label>
+                        @if($veiculo->foto)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $veiculo->foto) }}" 
+                                     alt="Foto atual" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                        @endif
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" 
+                               id="foto" name="foto" accept="image/*">
+                        @error('foto')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Salvar Alterações
+                    </button>
+                </div>
+            </form>
         </div>
-    
-        <div class="mb-3">
-            <label for="combustivel" class="form-label">Informe combustível:</label>
-            <input type="text" id="combustivel" name="combustivel" value="{{ $veiculo->combustivel }}" class="form-control" required="">
-        </div>
-
-        <div class="mb-3">
-            <label for="foto" class="form-label">Foto</label>
-            @if ($veiculo->foto)
-                <img src="{{ asset('storage/'. $veiculo->foto) }}" height="50"/>
-            @endif
-            <input type="file" name="foto" id="foto" class="form-control">
-        </div>
-    
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+    </div>
+</div>
+@endsection
