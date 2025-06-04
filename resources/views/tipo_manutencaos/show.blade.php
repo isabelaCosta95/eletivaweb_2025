@@ -1,32 +1,43 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Consultar Tipo de Manutenção</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body class="container">
-    <h1>Consultar Tipo de Manutenção</h1>
-    
-    <form method="post" action="/tipo_manutencaos/{{ $tipo_manutencao-> id }}">
-        @CSRF
-        @method('DELETE')
-        <div class="mb-3">
-            <label for="nome" class="form-label">Informe o nome:</label>
-            <input type="text" id="nome" name="nome" value="{{ $tipo_manutencao->nome}}" class="form-control" disabled>
-        </div>
-    
-        <div class="mb-3">
-            <label for="descricao" class="form-label">Informe o preço:</label>
-            <input type="text" id="descricao" name="descricao" value="{{ $tipo_manutencao->descricao }}" class="form-control" disabled>
-        </div>
+@extends('layout')
 
-        <p>Deseja excluir o registro?</p>
-        <button type="submit" class="btn btn-danger">Excluir</button>
-        <a href="/tipo_manutencaos" class="btn btn-primary">Cancelar</a>
-    </form>
+@section('principal')
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Detalhes do Tipo de Manutenção</h1>
+            <p class="text-muted">Visualize os dados do tipo de manutenção</p>
+        </div>
+        <a href="{{ route('tipo_manutencaos.index') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" action="{{ route('tipo_manutencaos.destroy', $tipo_manutencao->id) }}">
+                @csrf
+                @method('DELETE')
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" value="{{ $tipo_manutencao->nome }}" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <input type="text" class="form-control" value="{{ $tipo_manutencao->descricao }}" disabled>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ route('tipo_manutencaos.edit', $tipo_manutencao->id) }}" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <button type="submit" class="btn btn-danger" 
+                            onclick="return confirm('Tem certeza que deseja excluir este tipo de manutenção?')">
+                        <i class="bi bi-trash"></i> Excluir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
