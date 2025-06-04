@@ -1,70 +1,53 @@
-@extends('layout')
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Categorias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body class="container">
+    <h1>Categorias</h1>
 
-@section('principal')
-<div class="container-fluid py-4">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h1 class="h3 mb-0 text-gray-800">Categorias</h1>
-            <p class="text-muted">Gerencie as categorias de produtos</p>
+    <a class="btn btn-primary mb-3" href="/categorias/create">Nova Categoria</a> 
+
+    @if (session('erro'))
+        <div class="alert alert-danger">
+            {{ session('erro')}}
         </div>
-    </div>
+    @endif
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                    <h6 class="m-0 font-weight-bold text-primary">Lista de Categorias</h6>
-                    <a href="/categorias/create" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Nova Categoria
-                    </a>
-                </div>
-                <div class="card-body">
-                    @if (session('erro'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('erro') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    @if (session('sucesso'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('sucesso') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th width="200">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($categorias as $categoria)
-                                    <tr>
-                                        <td>{{ $categoria->id }}</td>
-                                        <td>{{ $categoria->nome }}</td>
-                                        <td>{{ $categoria->descricao }}</td>
-                                        <td>
-                                            <a href="/categorias/{{ $categoria->id }}/edit" class="btn btn-warning btn-sm">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="/categorias/{{ $categoria->id }}" class="btn btn-info btn-sm">
-                                                <i class="bi bi-eye"></i> Consultar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    @if (session('sucesso'))
+        <div class="alert alert-success">
+            {{ session('sucesso')}}
         </div>
-    </div>
-</div>
-@endsection
+    @endif
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody> 
+            @foreach ($categorias as $p)
+                <tr>
+                    <td> {{ $p->id }}</td>
+                    <td> {{ $p->nome }}</td>
+                    <td> {{ $p->descricao }}</td>
+                    <td>
+                        <a href="/categorias/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
+                        <a href="/categorias/{{ $p->id }}" class="btn btn-info">Consultar</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
