@@ -57,21 +57,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('cidades*') ? 'active' : '' }}" href="/cidades">
-                  <i class="bi bi-geo-alt"></i> Cidades
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {{ request()->is('plano_contas*') ? 'active' : '' }}" href="/plano_contas">
-                  <i class="bi bi-journal-text"></i> Plano de Contas
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {{ request()->is('cargos*') ? 'active' : '' }}" href="/cargos">
-                  <i class="bi bi-person-badge"></i> Cargos
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link {{ request()->is('funcionarios*') ? 'active' : '' }}" href="/funcionarios">
                   <i class="bi bi-people"></i> Funcionários
                 </a>
@@ -82,8 +67,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link {{ request()->is('cargos*') ? 'active' : '' }}" href="/cargos">
+                  <i class="bi bi-person-badge"></i> Cargos
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{ request()->is('seguradoras*') ? 'active' : '' }}" href="/seguradoras">
                   <i class="bi bi-shield"></i> Seguradoras
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('plano_contas*') ? 'active' : '' }}" href="/plano_contas">
+                  <i class="bi bi-journal-text"></i> Plano de Contas
                 </a>
               </li>
             @endif
@@ -100,23 +95,23 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('categorias*') ? 'active' : '' }}" href="/categorias">
-                  <i class="bi bi-tags"></i> Categorias
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link {{ request()->is('produtos*') ? 'active' : '' }}" href="/produtos">
                   <i class="bi bi-box"></i> Produtos
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('tipo_manutencaos*') ? 'active' : '' }}" href="/tipo_manutencaos">
-                  <i class="bi bi-tools"></i> Tipos de Manutenção
+                <a class="nav-link {{ request()->is('categorias*') ? 'active' : '' }}" href="/categorias">
+                  <i class="bi bi-tags"></i> Categorias
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {{ request()->is('pecas*') ? 'active' : '' }}" href="/pecas">
                   <i class="bi bi-gear"></i> Peças
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('tipo_manutencaos*') ? 'active' : '' }}" href="/tipo_manutencaos">
+                  <i class="bi bi-tools"></i> Tipos de Manutenção
                 </a>
               </li>
             @endif
