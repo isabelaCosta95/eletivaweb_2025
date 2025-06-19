@@ -109,6 +109,11 @@
               <i class="bi bi-shield"></i> Seguradoras
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('relatorios') ? 'active' : '' }}" href="/relatorios">
+              <i class="bi bi-bar-chart"></i> Relatórios
+            </a>
+          </li>
         @endif
         @if (Auth::user()->role == "CLI")
           <li class="nav-item">

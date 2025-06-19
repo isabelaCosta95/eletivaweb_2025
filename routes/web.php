@@ -18,6 +18,7 @@ use App\Http\Controllers\PlanoContaController;
 use App\Http\Controllers\PecaController;
 use App\Http\Controllers\SeguradoraController;
 use App\Http\Controllers\CargoController;
+use App\Http\Controllers\RelatorioController;
 
 
 Route::get("/cadastro", [UserController::class, 'create']);
@@ -58,5 +59,15 @@ Route::middleware("auth")->group(function (){
         Route::resource("tipo_manutencaos", TipoManutencaoController::class);
         Route::resource("pecas", PecaController::class);
     });
+
+    // Rotas de relatórios (PDF)
+    Route::get('/relatorios/movimentacao-carga', [RelatorioController::class, 'movimentacaoCargaPDF'])->name('relatorios.movimentacao-carga');
+    Route::get('/relatorios/gerenciar-paletes', [RelatorioController::class, 'gerenciarPaletesPDF'])->name('relatorios.gerenciar-paletes');
+    Route::get('/relatorios/extrato-viagens', [RelatorioController::class, 'extratoViagensPDF'])->name('relatorios.extrato-viagens');
+
+    // Página de listagem de relatórios (frontend)
+    Route::middleware("auth")->get('/relatorios', function () {
+        return view('relatorios.index');
+    })->name('relatorios.index');
 
 });
